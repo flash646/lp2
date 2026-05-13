@@ -1,0 +1,44 @@
+def substitute(char):
+    return chr((ord(char) + 3) % 256)
+
+def inverse_substitute(char):
+    return chr((ord(char) - 3) % 256)
+
+
+def encrypt(text, key):
+    result = []
+
+    for i in range(len(text)):
+        substituted = substitute(text[i])
+        enc_char = ord(substituted) ^ ord(key[i % len(key)])
+        result.append(enc_char)
+
+    return result  # return list of integers
+
+
+def decrypt(cipher, key):
+    result = ""
+
+    for i in range(len(cipher)):
+        xor_back = chr(cipher[i] ^ ord(key[i % len(key)]))
+        original = inverse_substitute(xor_back)
+        result += original
+
+    return result
+
+
+# ---------------- MAIN ----------------
+if __name__ == "__main__":
+    text = "Hello AES"
+    key = "key123"
+
+    print("Original Text:", text)
+
+    encrypted = encrypt(text, key)
+
+    # Convert to readable hex format
+    encrypted_hex = [hex(i) for i in encrypted]
+    print("Encrypted Text (HEX):", encrypted_hex)
+
+    decrypted = decrypt(encrypted, key)
+    print("Decrypted Text:", decrypted)

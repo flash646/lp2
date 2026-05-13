@@ -1,0 +1,42 @@
+# Encryption function
+def encrypt(text, key):
+    cipher = ""
+
+    for col in range(key):
+        pointer = col
+
+        while pointer < len(text):
+            cipher += text[pointer]
+            pointer += key
+
+    return cipher
+
+
+# Decryption function
+def decrypt(cipher, key):
+    plain = [""] * len(cipher)
+
+    index = 0
+
+    for col in range(key):
+        pointer = col
+
+        while pointer < len(cipher):
+            plain[pointer] = cipher[index]
+            index += 1
+            pointer += key
+
+    return "".join(plain)
+
+
+# Main program
+text = "HELLO WORLD"
+key = 4
+
+print("Original Text :", text)
+
+encrypted = encrypt(text, key)
+print("Encrypted Text:", encrypted)
+
+decrypted = decrypt(encrypted, key)
+print("Decrypted Text:", decrypted)

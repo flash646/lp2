@@ -1,0 +1,50 @@
+# RSA Algorithm Implementation (Simple Educational Version)
+
+# Function to calculate gcd
+def gcd(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return a
+
+
+# Function to calculate modular inverse
+def mod_inverse(e, phi):
+    for d in range(2, phi):
+        if (e * d) % phi == 1:
+            return d
+    return -1
+
+
+# ---------------- MAIN PROGRAM ----------------
+if __name__ == "__main__":
+
+    # Step 1: Choose two prime numbers
+    p = 3
+    q = 11
+
+    # Step 2: Compute n and phi
+    n = p * q
+    phi = (p - 1) * (q - 1)
+
+    # Step 3: Choose e (public key exponent)
+    e = 7
+    while gcd(e, phi) != 1:
+        e += 1
+
+    # Step 4: Compute d (private key)
+    d = mod_inverse(e, phi)
+
+    print("Public Key (e, n):", (e, n))
+    print("Private Key (d, n):", (d, n))
+
+    # Message to encrypt
+    msg = 9
+    print("\nOriginal Message:", msg)
+
+    # Encryption: C = (M^e) % n
+    cipher = (msg ** e) % n
+    print("Encrypted Message:", cipher)
+
+    # Decryption: M = (C^d) % n
+    decrypted = (cipher ** d) % n
+    print("Decrypted Message:", decrypted)
