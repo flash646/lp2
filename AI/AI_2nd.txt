@@ -1,0 +1,36 @@
+import heapq
+
+def a_star(graph, h, start, goal):
+    pq = [(h[start], 0, start, [start])]
+    visited = set()
+
+    while pq:
+        f, g, node, path = heapq.heappop(pq)
+
+        if node == goal:
+            return path, g
+
+        visited.add(node)
+
+        for nei, cost in graph[node]:
+            if nei not in visited:
+                g_new = g + cost
+                f_new = g_new + h[nei]
+                heapq.heappush(pq, (f_new, g_new, nei, path + [nei]))
+
+graph = {
+    'a': [('b', 4), ('c', 3)],
+    'b': [('f', 5), ('e', 12)],
+    'c': [('d', 7), ('e', 10)],
+    'd': [('e', 2)],
+    'e': [('z', 5)],
+    'f': [('z', 16)],
+    'z': []
+}
+
+h = {'a':14, 'b':12, 'c':11, 'd':6, 'e':4, 'f':11, 'z':0}
+
+path, cost = a_star(graph, h, 'a', 'z')
+
+print("Path found:", " -> ".join(path))
+print("Total cost:", cost)

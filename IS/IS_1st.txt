@@ -1,0 +1,19 @@
+# Original String
+text = "Hello World"
+
+print("Original String :", text)
+
+print("\nAfter AND with 127:")
+for ch in text:
+    result = ord(ch) & 127
+    print(result, end='')
+
+print("\n\nAfter OR with 127:")
+for ch in text:
+    result = ord(ch) | 127
+    print(result, end='')
+
+print("\n\nAfter XOR with 127:")
+for ch in text:
+    result = ord(ch) ^ 127
+    print(result, end='')

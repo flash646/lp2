@@ -1,0 +1,35 @@
+# Simple AES-like Encryption and Decryption
+
+def encrypt(text, key):
+    encrypted = []
+
+    for i in range(len(text)):
+        ch = ord(text[i]) + 3          # substitution
+        ch = ch ^ ord(key[i % len(key)])   # XOR with key
+        encrypted.append(ch)
+
+    return encrypted
+
+
+def decrypt(cipher, key):
+    decrypted = ""
+
+    for i in range(len(cipher)):
+        ch = cipher[i] ^ ord(key[i % len(key)])   # XOR back
+        ch = chr(ch - 3)                          # reverse substitution
+        decrypted += ch
+
+    return decrypted
+
+
+# Main Program
+text = input("Enter text: ")
+key = input("Enter key: ")
+
+encrypted = encrypt(text, key)
+
+print("Encrypted:", encrypted)
+
+decrypted = decrypt(encrypted, key)
+
+print("Decrypted:", decrypted)
