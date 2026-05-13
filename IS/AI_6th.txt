@@ -1,0 +1,42 @@
+# Expert System for Employee Performance Evaluation
+
+def evaluate_employee():
+
+    print("===== Employee Performance Evaluation System =====")
+
+    # Taking employee details
+    name = input("Enter Employee Name: ")
+
+    print("\nRate employee performance from 1 to 5")
+
+    attendance = int(input("Attendance: "))
+    teamwork = int(input("Teamwork: "))
+    task_completion = int(input("Task Completion: "))
+    communication = int(input("Communication Skills: "))
+
+    # Calculating average score
+    average = (attendance + teamwork + task_completion + communication) / 4
+
+    # Expert system rules
+    if average >= 4.5:
+        performance = "Excellent"
+        suggestion = "Eligible for Promotion"
+
+    elif average >= 3:
+        performance = "Good"
+        suggestion = "Can Improve Further"
+
+    else:
+        performance = "Poor"
+        suggestion = "Needs Training"
+
+    # Displaying result
+    print("\n===== Performance Report =====")
+    print("Employee Name:", name)
+    print("Average Score:", round(average, 2))
+    print("Performance Level:", performance)
+    print("Suggestion:", suggestion)
+
+
+# Main function call
+evaluate_employee()
